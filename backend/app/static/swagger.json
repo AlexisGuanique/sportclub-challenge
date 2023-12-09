@@ -1,0 +1,164 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "API Sportclub",
+        "description": "API para la gestión de usuarios de Sportclub.",
+        "version": "1.0.0"
+    },
+    "host": "localhost:5000",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/usuarios": {
+            "get": {
+                "summary": "Obtiene todos los usuarios",
+                "responses": {
+                    "200": {
+                        "description": "Una lista de usuarios",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Usuario"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crea un nuevo usuario",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Información del usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Usuario creado"
+                    }
+                }
+            }
+        },
+        "/usuarios/filtrar": {
+            "get": {
+                "summary": "Obtiene usuarios filtrados por criterios específicos",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "nombre",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "apellido",
+                        "type": "string"
+                    },
+                    {
+                        "in": "query",
+                        "name": "dni",
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fecha_desde",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fecha_hasta",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    {
+                        "in": "query",
+                        "name": "localidad_gba",
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista filtrada de usuarios"
+                    }
+                }
+            }
+        },
+        "/usuarios/{usuario_id}": {
+            "put": {
+                "summary": "Actualiza un usuario",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "usuario_id",
+                        "type": "integer",
+                        "required": true
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Información actualizada del usuario",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Usuario"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario actualizado"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Elimina un usuario",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "usuario_id",
+                        "type": "integer",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuario eliminado"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Usuario": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "nombre": {
+                    "type": "string"
+                },
+                "apellido": {
+                    "type": "string"
+                },
+                "dni": {
+                    "type": "integer"
+                },
+                "fecha_nacimiento": {
+                    "type": "string",
+                    "format": "date"
+                },
+                "localidad_gba": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
