@@ -48,7 +48,7 @@ def crear_usuario(nombre, apellido, dni, fecha_nacimiento, localidad_gba, reques
 
 
 
-#! Obtner todos los usuarios de mi base de datos
+#! Obtener todos los usuarios de mi base de datos
 def obtener_usuarios():
     usuarios = db.session.query(db.metadata.tables['usuarios']).all()
     return usuarios
